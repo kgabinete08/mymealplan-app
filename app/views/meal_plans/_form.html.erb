@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="medium-6 columns">
+    <h4>Create a Meal Plan</h4>
+  </div>
+</div>
+<%= form_for obj do |f| %>
+<div class="row">
+  <div class="medium-6 columns">
+    <%= f.label :title %>
+    <%= f.text_field :title  %>
+  </div>
+</div>
+<div class="row">
+  <div class="medium-6 columns">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+</div>
+<div class="row">
+  <div class="medium-6 columns">
+    <%= f.label "recipes" %>
+    <%= f.collection_check_boxes :recipe_ids, Recipe.all, :id, :title do |cb| %>
+      <% cb.label {cb.check_box(class: "checkbox") + " " + cb.text } %>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="medium-6 columns">
+    <%= f.submit(@meal_plan.new_record? ? "Create Meal Plan" : "Update Meal Plan", class: "button") %>
+  </div>
+</div>
+<% end %>

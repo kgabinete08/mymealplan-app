@@ -1,0 +1,9 @@
+<div class="row panel">
+  <div class="row medium-12 columns">
+    <h4><%= link_to obj.title, recipe_path(obj) %></h4>
+    <p><em>Description: </em><%= display_fix(obj.description) %></p>
+    <p><em>Preparation time: </em><%= display_fix(obj.prep_time) %></p>
+    <p><em>Ingredients: </em><%= display_fix(obj.ingredients) %></p>
+    <p><em>Directions: </em><%= display_fix(obj.directions) %></p>
+  </div>
+</div>

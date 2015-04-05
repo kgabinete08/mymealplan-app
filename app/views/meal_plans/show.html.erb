@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="right medium-2 columns">
+    <%= link_to 'Edit meal plan', edit_meal_plan_path(@meal_plan), class: "button tiny" %>
+  </div>
+</div>
+
+<%= render 'meal_plan', obj: @meal_plan %>
+
+<div class="row panel">
+  <div class="row medium-12 columns">
+    <h5>Recipes</h5>
+      <% @meal_plan.recipes.each do |recipe| %>
+      <ul>
+        <li><%= recipe.title %></li>
+      </ul>
+      <% end %>
+  </div>
+</div>

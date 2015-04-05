@@ -1,0 +1,9 @@
+<div class="row">
+  <h4>Recipes</h4>
+</div>
+
+<% @recipes.each do |recipe| %>
+  <%= render 'recipe', obj: recipe %>
+<% end %>
+
+

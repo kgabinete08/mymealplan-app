@@ -1,0 +1,3 @@
+== README
+
+This is my capstone app for course 2 at Tealeaf Academy.  More information will be added later.

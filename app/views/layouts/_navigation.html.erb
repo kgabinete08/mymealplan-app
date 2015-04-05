@@ -1,0 +1,31 @@
+<nav class="top-bar" data-topbar role="navigation">
+  <ul class="title-area">
+    <li class="name">
+      <h1><%= link_to 'MyMealPlanner', root_path %></h1>
+    </li>
+  </ul>
+
+  <% if logged_in? %>
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <li><%= link_to current_user.username, edit_user_path(current_user) %></li>
+      <li><%= link_to 'Log out', logout_path %></li>
+    </ul>
+    <!-- Left Nav Section -->
+    <ul class="left">
+      <li><%= link_to 'Add Recipe', new_recipe_path %></li>
+      <li><%= link_to 'My Meal Plans', meal_plans_path, class: 'button success' %></li>
+    </ul>
+  </section>
+  <% else %>
+  <!-- Logged out -->
+  <section class="top-bar-section">
+    <ul class="right">
+      <li><%= link_to 'Register', new_user_path %></li>
+      <li><%= link_to 'Log in', login_path %></li>
+    </ul>
+  </section>
+  <% end %>
+</nav>
+<br/>
