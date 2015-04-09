@@ -1,4 +1,7 @@
 class RecipesController < ApplicationController
+  before_action :set_recipe, only: [:show, :edit, :update]
+  before_action :require_user, except: [:index, :show]
+  # before_action :require_correct_user, only: [:edit, :update]
 
   def index
     @recipes = Recipe.all
@@ -9,7 +12,7 @@ class RecipesController < ApplicationController
   end
 
   def show
-    @recipe = Recipe.find(params[:id])
+    @comment = Comment.new
   end
 
   def create
@@ -23,12 +26,9 @@ class RecipesController < ApplicationController
     end
   end
 
-  def edit
-    @recipe = Recipe.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @recipe = Recipe.find(params[:id])
 
     if @recipe.update(recipe_params)
       flash[:success] = "The recipe was updated"
@@ -43,4 +43,15 @@ class RecipesController < ApplicationController
   def recipe_params
     params.require(:recipe).permit(:title, :description, :prep_time, :ingredients, :directions)
   end
+
+  def set_recipe
+    @recipe = Recipe.find(params[:id])
+  end
+
+  # def require_correct_user
+  #   if @post.creator != current_user
+  #     flash[:error] = "You do not have the permission to do that."
+  #     redirect_to root_path
+  #   end unless current_user.admin?
+  # end
 end

@@ -1,4 +1,6 @@
 class MealPlansController < ApplicationController
+  before_action :set_meal_plan, only: [:show, :edit, :update]
+  before_action :require_user
 
   def index
     @meal_plans = MealPlan.all
@@ -10,7 +12,9 @@ class MealPlansController < ApplicationController
   end
 
   def create
+    binding.pry
     @meal_plan = MealPlan.new(meal_plan_params)
+    @meal_plan.user = current_user
 
     if @meal_plan.save
       flash[:success] = "Your meal_plan has been created."
@@ -20,16 +24,11 @@ class MealPlansController < ApplicationController
     end
   end
 
-  def show
-    @meal_plan = MealPlan.find(params[:id])
-  end
+  def show; end
 
-  def edit
-    @meal_plan = MealPlan.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @meal_plan = MealPlan.find(params[:id])
 
     if @meal_plan.update(meal_plan_params)
       flash[:success] = "Meal plan has been updated."
@@ -42,6 +41,10 @@ class MealPlansController < ApplicationController
   private
 
   def meal_plan_params
-    params.require(:meal_plan).permit(:title, :description, recipe_ids: [])
+    params.require(:meal_plan).permit(:title, :description, :day, :meal, recipe_ids: [])
+  end
+
+  def set_meal_plan
+    @meal_plan = MealPlan.find(params[:id])
   end
 end

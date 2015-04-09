@@ -1,0 +1,13 @@
+<% show_recipe ||= false %>
+
+<div class="row panel">
+  <div class="medium-12 columns">
+    <em>"<%= comment.body %>"</em>
+    <% if show_recipe %>
+      on <%= link_to comment.recipe.title, post_path(comment.recipe) %>
+    <% end %>
+    <br/>
+    <span class="quiet">by</span> <%= link_to comment.user.username, user_path(comment.user) %>
+    <small>at <%= display_time(comment.created_at) %></small>
+  </div>
+</div>

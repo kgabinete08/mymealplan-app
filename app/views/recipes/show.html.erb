@@ -1,8 +1,28 @@
 <div class="row">
   <div class="right medium-2 columns">
-    <%= link_to 'Edit recipe', edit_recipe_path(@recipe), class: "button tiny" %>
+    <% if current_user == @recipe.user %>
+      <%= link_to 'Edit recipe', edit_recipe_path(@recipe), class: "button tiny" %>
+    <% end %>
   </div>
 </div>
 
 <%= render 'recipe', obj: @recipe %>
 
+<% if logged_in? %>
+  <%= form_for [@recipe, @comment] do |f| %>
+    <%= render 'shared/errors', obj: @comment %>
+    <div class="row panel">
+      <div class="medium-12 columns">
+        <%= f.label :body, 'Comment' %>
+        <%= f.text_area :body, rows: 3, class: 'medium-10 columns', placeholder: 'Leave your comment here'%>
+        <div class="row right">
+          <%= f.submit 'Add comment', class: 'button small' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<% @recipe.comments.each do |comment| %>
+  <%= render 'comments/comment', comment: comment %>
+<% end %>

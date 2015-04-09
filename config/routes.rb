@@ -6,7 +6,10 @@ MykitchenApp::Application.routes.draw do
   post 'login', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy'
 
-  resources :recipes, except: [:destroy]
+  resources :recipes, except: [:destroy] do
+    resources :comments, only: [:create]
+  end
   resources :meal_plans
-  resources :users
+  resources :users, except: [:destroy]
+
 end

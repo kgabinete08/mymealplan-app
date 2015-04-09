@@ -18,6 +18,18 @@
 </div>
 <div class="row">
   <div class="medium-6 columns">
+    <%= f.label :meal %>
+    <%= f.select :meal, MealPlan::MEALS %>
+  </div>
+</div>
+<div class="row">
+  <div class="medium-6 columns">
+    <%= f.label :day %>
+    <%= f.select :day, Date::DAYNAMES %>
+  </div>
+</div>
+<div class="row">
+  <div class="medium-6 columns">
     <%= f.label "recipes" %>
     <%= f.collection_check_boxes :recipe_ids, Recipe.all, :id, :title do |cb| %>
       <% cb.label {cb.check_box(class: "checkbox") + " " + cb.text } %>

@@ -8,5 +8,8 @@
 </div>
 
 <% @meal_plans.each do |meal_plan| %>
-  <%= render 'meal_plan', obj: meal_plan %>
+  <div class="row panel">
+    <h5><%= link_to meal_plan.title, meal_plan_path(meal_plan) %></h5>
+    <p><%= meal_plan.description %></p>
+  </div>
 <% end %>

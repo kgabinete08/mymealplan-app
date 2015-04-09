@@ -1,0 +1,14 @@
+<%= render 'shared/content_title', title: 'Profile' %>
+
+<div class="row">
+  <div class="right medium-2 columns">
+    <%= link_to 'Edit profile', edit_user_path(current_user), class: "button tiny" %>
+  </div>
+</div>
+<div class="row">
+  <div class="medium-12 columns">
+  <p class="panel">
+    <strong>Username: </strong><%= current_user.username %>
+  </p>
+  </div>
+</div>
