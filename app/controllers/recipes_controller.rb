@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  before_action :set_recipe, only: [:show, :edit, :update]
+  before_action :set_recipe, only: [:show, :edit, :update, :vote]
   before_action :require_user, except: [:index, :show]
   # before_action :require_correct_user, only: [:edit, :update]
 
@@ -36,6 +36,17 @@ class RecipesController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def vote
+    @vote = Vote.create(recipe: @recipe, user: current_user, vote: params[:vote])
+
+    if @vote.valid?
+      flash[:success] = "Your vote was added."
+    else
+      flash[:alert] = "You can only vote once."
+    end
+    redirect_to :back
   end
 
   private

@@ -8,6 +8,9 @@ MykitchenApp::Application.routes.draw do
 
   resources :recipes, except: [:destroy] do
     resources :comments, only: [:create]
+    member do
+      post :vote
+    end
   end
   resources :meal_plans
   resources :users, except: [:destroy]

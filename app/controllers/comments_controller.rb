@@ -2,7 +2,6 @@ class CommentsController < ApplicationController
   before_action :require_user, :set_recipe
 
   def create
-    binding.pry
     @comment = @recipe.comments.build(comment_params)
     @comment.user = current_user
 

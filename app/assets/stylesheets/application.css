@@ -14,6 +14,14 @@
  *= require_tree .
  */
 
+#comments {
+  display: none;
+}
+
 .quiet {
   color: #ababab;
 }
+
+.large {
+  font-size: 1.5rem;
+  }

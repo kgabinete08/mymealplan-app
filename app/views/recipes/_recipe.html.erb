@@ -1,9 +1,23 @@
 <div class="row panel">
-  <div class="row medium-12 columns">
+  <div class="medium-12 columns">
     <h4><%= link_to obj.title, recipe_path(obj) %></h4>
     <p><em>Description: </em><%= display_fix(obj.description) %></p>
     <p><em>Preparation time: </em><%= display_fix(obj.prep_time) %></p>
     <p><em>Ingredients: </em><%= display_fix(obj.ingredients) %></p>
     <p><em>Directions: </em><%= display_fix(obj.directions) %></p>
   </div>
+  <% if logged_in? %>
+  <div class="small-1 columns">
+    <%= button_to vote_recipe_path(@recipe, vote: true), method: :post, class: 'button tiny' do %>
+      <span><%= @recipe.upvotes %></span><br/>
+      <i class="fi-like large"></i>
+    <% end %>
+  </div>
+  <div class="small-1 columns left">
+    <%= button_to vote_recipe_path(@recipe, vote: false), method: :post, class: 'button tiny' do %>
+      <span><%= @recipe.downvotes %></span><br/>
+      <i class="fi-dislike large"></i>
+    <% end %>
+  </div>
+  <% end %>
 </div>

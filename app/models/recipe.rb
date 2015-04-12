@@ -4,6 +4,7 @@ class Recipe < ActiveRecord::Base
   has_many :comments
   has_many :meal_plan_recipes
   has_many :meal_plans, through: :meal_plan_recipes
+  has_many :votes
 
   validates :title, presence: :true, uniqueness: :true, length: {minimum: 5}
   validates :description, presence: :true
