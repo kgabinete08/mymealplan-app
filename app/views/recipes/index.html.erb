@@ -7,5 +7,9 @@
   <h4><%= link_to recipe.title, recipe_path(recipe) %></h4>
   <p><em><%= display_fix(recipe.description) %></em></p>
   <p><%= "#{recipe.comments.size} comments" %></p>
+
+  <% if logged_in? %>
+    <%= render 'vote', obj: recipe %>
+  <% end %>
 </div>
 <% end %>

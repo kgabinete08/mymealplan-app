@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :vote]
   before_action :require_user, except: [:index, :show]
-  # before_action :require_correct_user, only: [:edit, :update]
+  before_action :require_correct_user, only: [:edit, :update]
 
   def index
     @recipes = Recipe.all
@@ -17,6 +17,7 @@ class RecipesController < ApplicationController
 
   def create
     @recipe = Recipe.new(recipe_params)
+    @recipe.user = current_user
 
     if @recipe.save
       flash[:success] = "Your recipe has been added."
@@ -29,7 +30,6 @@ class RecipesController < ApplicationController
   def edit; end
 
   def update
-
     if @recipe.update(recipe_params)
       flash[:success] = "The recipe was updated"
       redirect_to recipe_path(@recipe)
@@ -41,12 +41,15 @@ class RecipesController < ApplicationController
   def vote
     @vote = Vote.create(recipe: @recipe, user: current_user, vote: params[:vote])
 
-    if @vote.valid?
-      flash[:success] = "Your vote was added."
-    else
-      flash[:alert] = "You can only vote once."
+    respond_to do |format|
+      if @vote.valid?
+        format.js
+        format.html { redirect_to :back, success: "Your vote was added." }
+      else
+        format.js
+        format.html { redirect_to :back, alert: "You can only vote once."}
+      end
     end
-    redirect_to :back
   end
 
   private
@@ -59,10 +62,10 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
   end
 
-  # def require_correct_user
-  #   if @post.creator != current_user
-  #     flash[:error] = "You do not have the permission to do that."
-  #     redirect_to root_path
-  #   end unless current_user.admin?
-  # end
+  def require_correct_user
+    if @recipe.user != current_user
+      flash[:alert] = "You do not have the permission to do that."
+      redirect_to root_path
+    end unless current_user.admin?
+  end
 end

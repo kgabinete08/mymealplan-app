@@ -7,12 +7,11 @@ MykitchenApp::Application.routes.draw do
   get 'logout', to: 'sessions#destroy'
 
   resources :recipes, except: [:destroy] do
-    resources :comments, only: [:create]
     member do
       post :vote
     end
+    resources :comments, only: [:create]
   end
   resources :meal_plans
   resources :users, except: [:destroy]
-
 end

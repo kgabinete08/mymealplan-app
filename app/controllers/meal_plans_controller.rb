@@ -1,9 +1,14 @@
 class MealPlansController < ApplicationController
-  before_action :set_meal_plan, only: [:show, :edit, :update]
+  before_action :set_meal_plan, only: [:show, :edit, :update, :destroy]
   before_action :require_user
+  before_action :require_correct_user, only: [:edit, :update, :destroy]
 
   def index
-    @meal_plans = MealPlan.all
+    if current_user.admin?
+      @meal_plans = MealPlan.all
+    else
+      @meal_plans = @current_user.meal_plans
+    end
   end
 
   def new
@@ -12,7 +17,6 @@ class MealPlansController < ApplicationController
   end
 
   def create
-    binding.pry
     @meal_plan = MealPlan.new(meal_plan_params)
     @meal_plan.user = current_user
 
@@ -38,6 +42,13 @@ class MealPlansController < ApplicationController
     end
   end
 
+  def destroy
+    if @meal_plan.destroy
+      flash[:success] = "Meal plan has been deleted."
+      redirect_to meal_plans_path
+    end
+  end
+
   private
 
   def meal_plan_params
@@ -46,5 +57,12 @@ class MealPlansController < ApplicationController
 
   def set_meal_plan
     @meal_plan = MealPlan.find(params[:id])
+  end
+
+  def require_correct_user
+    if @meal_plan.user != current_user
+      flash[:alert] = "You do not have the permission to do that."
+      redirect_to root_path
+    end unless current_user.admin?
   end
 end

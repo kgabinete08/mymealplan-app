@@ -1,5 +1,12 @@
-<div class="row">
-  <%= link_to recipe_vote_path(recipe, vote: true), method: :post do %>
-    <i class="fi-like"></i>
+<div class="small-1 columns">
+  <%= link_to vote_recipe_path(obj, vote: true), class: 'button tiny', method: :post, remote: true do %>
+    <span id="recipe-<%= obj.id %>-upvotes"><%= obj.upvotes %></span><br/>
+    <i class="fi-like large"></i>
+  <% end %>
+</div>
+<div class="small-1 columns left">
+  <%= link_to vote_recipe_path(obj, vote: false), class: 'button tiny', method: :post, remote: true do %>
+    <span id="recipe-<%= obj.id %>-downvotes"><%= obj.downvotes %></span><br/>
+    <i class="fi-dislike large"></i>
   <% end %>
 </div>

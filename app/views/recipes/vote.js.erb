@@ -1,0 +1,6 @@
+<% if @vote.valid? %>
+  $("#recipe-<%= @recipe.id %>-upvotes").html("<%= @recipe.upvotes %>");
+  $("#recipe-<%= @recipe.id %>-downvotes").html("<%= @recipe.downvotes %>");
+<% else %>
+  alert("You can only vote once.")
+<% end %>
