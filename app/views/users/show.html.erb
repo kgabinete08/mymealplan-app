@@ -1,14 +1,17 @@
-<%= render 'shared/content_title', title: 'Profile' %>
+<%= render 'shared/content_title', title: "Profile: #{@user.username}" %>
 
 <div class="row">
+  <% if current_user == @user || (logged_in? && current_user.admin?) %>
   <div class="right medium-2 columns">
-    <%= link_to 'Edit profile', edit_user_path(current_user), class: "button tiny" %>
+    <%= link_to 'Edit profile', edit_user_path(@user), class: "button tiny" %>
   </div>
+  <% end %>
 </div>
 <div class="row">
   <div class="medium-12 columns">
   <p class="panel">
-    <strong>Username: </strong><%= current_user.username %>
+    <strong>Username: </strong><%= @user.username %><br/>
+    <strong>Time zone: </strong><%= @user.time_zone %>
   </p>
   </div>
 </div>

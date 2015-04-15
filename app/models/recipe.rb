@@ -1,4 +1,6 @@
 class Recipe < ActiveRecord::Base
+  include Sluggable
+
   belongs_to :user
 
   has_many :comments
@@ -10,6 +12,8 @@ class Recipe < ActiveRecord::Base
   validates :description, presence: :true
   validates :ingredients, presence: :true
   validates :directions, presence: :true
+
+  sluggable_column :title
 
   def upvotes
     self.votes.where(vote: true).size

@@ -21,7 +21,7 @@ class MealPlansController < ApplicationController
     @meal_plan.user = current_user
 
     if @meal_plan.save
-      flash[:success] = "Your meal_plan has been created."
+      flash[:success] = "Your meal plan has been created."
       redirect_to meal_plan_path(@meal_plan)
     else
       render :new
@@ -33,7 +33,6 @@ class MealPlansController < ApplicationController
   def edit; end
 
   def update
-
     if @meal_plan.update(meal_plan_params)
       flash[:success] = "Meal plan has been updated."
       redirect_to meal_plan_path(@meal_plan)
@@ -56,7 +55,7 @@ class MealPlansController < ApplicationController
   end
 
   def set_meal_plan
-    @meal_plan = MealPlan.find(params[:id])
+    @meal_plan = MealPlan.find_by slug: params[:id]
   end
 
   def require_correct_user

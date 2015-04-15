@@ -1,8 +1,16 @@
+<%= render 'shared/errors', obj: @user %>
+
 <%= form_for obj do |f| %>
 <div class="row">
   <div class="medium-6 columns">
     <%= f.label :username %>
     <%= f.text_field :username  %>
+  </div>
+</div>
+<div class="row">
+  <div class="medium-6 columns">
+    <%= f.label :time_zone %>
+    <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, default: Time.zone.name %>
   </div>
 </div>
 <div class="row">
@@ -13,7 +21,7 @@
 </div>
 <div class="row">
   <div class="medium-6 columns">
-    <%= f.submit(@user.new_record? ? "Register" : "Edit profile", class: "button") %>
+    <%= f.submit(@user.new_record? ? "Register" : "Update profile", class: "button") %>
   </div>
 </div>
 <% end %>

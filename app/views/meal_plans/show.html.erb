@@ -1,16 +1,17 @@
 <div class="row">
   <% if current_user == @meal_plan.user || (logged_in? && current_user.admin?) %>
-  <div class="right small-4 columns">
+  <div class="right">
     <%= link_to 'Edit meal plan', edit_meal_plan_path(@meal_plan), class: "button tiny" %>
     <%= link_to 'Delete meal plan', @meal_plan, method: :delete, data: { confirm: "Are you sure?"}, class: "button tiny" %>
   </div>
   <% end %>
 </div>
 
-<%= render 'meal_plan', obj: @meal_plan %>
+<%= render 'shared/content_title', title: "#{@meal_plan.title}" %>
 
 <div class="row panel clearfix">
   <div class="row medium-4 columns left">
+    <h6><strong>Description: </strong><%= @meal_plan.description %></h6>
     <h6><strong>Day: </strong><%= @meal_plan.day %></h6>
     <h6><strong>Meal: </strong><%= @meal_plan.meal %></h6>
     <h6><strong>Recipes: </strong></h6>

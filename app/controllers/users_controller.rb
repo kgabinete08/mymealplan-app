@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
+  before_action :require_user, only: [:edit, :update]
   before_action :require_correct_user, only: [:edit, :update]
 
   def new
@@ -35,14 +36,17 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :password)
+    params.require(:user).permit(:username, :password, :time_zone)
   end
 
   def set_user
-    @user = User.find(params[:id])
+    @user = User.find_by slug: params[:id]
   end
 
   def require_correct_user
-    redirect_to root_path if @user != current_user
+    if @user != current_user
+      flash[:alert] = "You do not have the permission to do that."
+      redirect_to root_path
+    end unless current_user.admin?
   end
 end

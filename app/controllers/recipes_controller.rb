@@ -59,7 +59,7 @@ class RecipesController < ApplicationController
   end
 
   def set_recipe
-    @recipe = Recipe.find(params[:id])
+    @recipe = Recipe.find_by slug: params[:id]
   end
 
   def require_correct_user

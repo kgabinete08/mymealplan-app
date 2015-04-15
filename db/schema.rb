@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414043821) do
+ActiveRecord::Schema.define(version: 20150415034541) do
 
   create_table "comments", force: true do |t|
     t.text     "body"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20150414043821) do
     t.integer  "user_id"
     t.string   "day"
     t.string   "meal"
+    t.string   "slug"
   end
 
   create_table "recipes", force: true do |t|
@@ -45,6 +46,7 @@ ActiveRecord::Schema.define(version: 20150414043821) do
     t.text     "directions"
     t.text     "ingredients"
     t.integer  "user_id"
+    t.string   "slug"
   end
 
   create_table "users", force: true do |t|
@@ -53,6 +55,8 @@ ActiveRecord::Schema.define(version: 20150414043821) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "role"
+    t.string   "time_zone"
+    t.string   "slug"
   end
 
   create_table "votes", force: true do |t|
