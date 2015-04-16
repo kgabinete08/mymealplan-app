@@ -14,8 +14,6 @@
  *= require_tree .
  */
 
-@import "foundation-icons";
-
 #comments {
   display: none;
 }
