@@ -17,6 +17,7 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 
 # Use Foundation framework
 gem 'foundation-rails'
+gem 'foundation-icons-sass-rails'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

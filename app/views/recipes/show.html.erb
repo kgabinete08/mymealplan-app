@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="right medium-2 columns">
+  <div class="right">
     <% if current_user == @recipe.user || (logged_in? && current_user.admin?) %>
       <%= link_to 'Edit recipe', edit_recipe_path(@recipe), class: "button tiny" %>
     <% end %>
