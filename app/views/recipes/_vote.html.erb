@@ -1,12 +1,17 @@
-<div class="small-1 columns">
-  <%= link_to vote_recipe_path(obj, vote: true), class: 'button tiny', method: :post, remote: true do %>
-    <span id="recipe-<%= obj.id %>-upvotes"><%= obj.upvotes %></span><br/>
-    <i class="fi-like large"></i>
-  <% end %>
-</div>
-<div class="small-1 columns left">
-  <%= link_to vote_recipe_path(obj, vote: false), class: 'button tiny', method: :post, remote: true do %>
-    <span id="recipe-<%= obj.id %>-downvotes"><%= obj.downvotes %></span><br/>
-    <i class="fi-dislike large"></i>
-  <% end %>
+<div>
+  <div class="small-2 columns">
+    <em>Like this recipe?</em>
+  </div>
+  <div class="small-1 columns left">
+    <%= link_to vote_recipe_path(obj, vote: true), class: 'button tiny', method: :post, remote: true do %>
+      <span id="recipe-<%= obj.id %>-upvotes"><%= obj.upvotes %></span><br/>
+      <small>Yes</small>
+    <% end %>
+  </div>
+  <div class="small-1 columns left">
+    <%= link_to vote_recipe_path(obj, vote: false), class: 'button tiny', method: :post, remote: true do %>
+      <span id="recipe-<%= obj.id %>-downvotes"><%= obj.downvotes %></span><br/>
+      <small>No</small>
+    <% end %>
+  </div>
 </div>
