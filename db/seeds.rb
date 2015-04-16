@@ -5,3 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+# Seeding in admin account
+
+# admin = User.find_by(username: 'admin')
+# admin.role = 'admin'
+# admin.save!

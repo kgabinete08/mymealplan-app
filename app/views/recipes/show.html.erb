@@ -8,6 +8,7 @@
 
 <%= render 'recipe', obj: @recipe %>
 
+<!-- Add comment -->
 <% if logged_in? %>
   <%= form_for [@recipe, @comment] do |f| %>
     <%= render 'shared/errors', obj: @comment %>
