@@ -8,6 +8,6 @@
 
 # Seeding in admin account
 
-# admin = User.find_by(username: 'admin')
-# admin.role = 'admin'
-# admin.save!
+admin = User.find_by(username: 'admin')
+admin.role = 'admin'
+admin.save!
